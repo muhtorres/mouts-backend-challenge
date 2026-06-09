@@ -1,11 +1,12 @@
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Domain.Events;
 
 /// <summary>
 /// Event raised when a sale is cancelled.
 /// </summary>
-public class SaleCancelledEvent
+public class SaleCancelledEvent : INotification
 {
     /// <summary>
     /// Gets the cancelled sale details.

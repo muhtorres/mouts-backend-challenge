@@ -1,11 +1,12 @@
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Domain.Events;
 
 /// <summary>
 /// Event raised when an existing sale is modified.
 /// </summary>
-public class SaleModifiedEvent
+public class SaleModifiedEvent : INotification
 {
     /// <summary>
     /// Gets the modified sale details.

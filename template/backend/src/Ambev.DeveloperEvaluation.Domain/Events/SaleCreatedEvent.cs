@@ -1,11 +1,12 @@
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Domain.Events;
 
 /// <summary>
 /// Event raised when a new sale is created.
 /// </summary>
-public class SaleCreatedEvent
+public class SaleCreatedEvent : INotification
 {
     /// <summary>
     /// Gets the created sale details.
