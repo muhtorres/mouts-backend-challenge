@@ -1,0 +1,88 @@
+@HostAddress = http://localhost:5000
+@SaleId = 4f981dc8-3482-411a-8bb7-e0344d5c1920
+@ItemId = 5d92df9a-8b3c-4a30-84a1-77d0794939b4
+
+### Create a Sale (with 3 items: 10 items [20% discount], 5 items [10% discount], 2 items [no discount])
+POST {{HostAddress}}/api/sales
+Content-Type: application/json
+
+{
+  "saleDate": "2026-06-08T16:00:00Z",
+  "customerId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "customerName": "John Doe",
+  "branchId": "7b8db00e-4fa0-482a-bc96-1a892b1a9f02",
+  "branchName": "Main Branch",
+  "items": [
+    {
+      "productId": "4fa85f64-5717-4562-b3fc-2c963f66afa1",
+      "productName": "Beer Case",
+      "quantity": 10,
+      "unitPrice": 15.0
+    },
+    {
+      "productId": "4fa85f64-5717-4562-b3fc-2c963f66afa2",
+      "productName": "Soda Bottle",
+      "quantity": 5,
+      "unitPrice": 2.5
+    },
+    {
+      "productId": "4fa85f64-5717-4562-b3fc-2c963f66afa3",
+      "productName": "Chips Bag",
+      "quantity": 2,
+      "unitPrice": 3.0
+    }
+  ]
+}
+
+###
+
+### Get Sale by ID
+GET {{HostAddress}}/api/sales/{{SaleId}}
+Accept: application/json
+
+###
+
+### List Sales (with pagination, order, and filters)
+GET {{HostAddress}}/api/sales?_page=1&_size=10&_order=saleDate desc&customerName=John*
+Accept: application/json
+
+###
+
+### Update Sale
+PUT {{HostAddress}}/api/sales/{{SaleId}}
+Content-Type: application/json
+
+{
+  "saleDate": "2026-06-08T16:30:00Z",
+  "customerId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "customerName": "John Doe Updated",
+  "branchId": "7b8db00e-4fa0-482a-bc96-1a892b1a9f02",
+  "branchName": "Main Branch Updated",
+  "items": [
+    {
+      "id": "{{ItemId}}",
+      "productId": "4fa85f64-5717-4562-b3fc-2c963f66afa1",
+      "productName": "Beer Case",
+      "quantity": 12,
+      "unitPrice": 14.5
+    }
+  ]
+}
+
+###
+
+### Cancel Sale
+POST {{HostAddress}}/api/sales/{{SaleId}}/cancel
+Accept: application/json
+
+###
+
+### Cancel Sale Item
+POST {{HostAddress}}/api/sales/{{SaleId}}/items/{{ItemId}}/cancel
+Accept: application/json
+
+###
+
+### Delete Sale
+DELETE {{HostAddress}}/api/sales/{{SaleId}}
+Accept: application/json
