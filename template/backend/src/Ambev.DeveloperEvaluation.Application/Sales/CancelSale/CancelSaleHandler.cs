@@ -1,3 +1,4 @@
+using Ambev.DeveloperEvaluation.Domain.Exceptions;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using MediatR;
 
@@ -28,7 +29,7 @@ public class CancelSaleHandler : IRequestHandler<CancelSaleCommand, CancelSaleRe
         var sale = await _saleRepository.GetByIdAsync(command.Id, cancellationToken);
         if (sale == null)
         {
-            throw new KeyNotFoundException($"Sale with ID {command.Id} not found");
+            throw new SalesNotFoundException($"Sale with ID {command.Id} not found");
         }
 
         sale.Cancel();

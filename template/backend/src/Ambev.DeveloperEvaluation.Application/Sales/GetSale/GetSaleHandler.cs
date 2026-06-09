@@ -1,3 +1,4 @@
+using Ambev.DeveloperEvaluation.Domain.Exceptions;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 using MediatR;
@@ -29,7 +30,7 @@ public class GetSaleHandler : IRequestHandler<GetSaleQuery, GetSaleResult>
         var sale = await _saleRepository.GetByIdAsync(query.Id, cancellationToken);
         if (sale == null)
         {
-            throw new KeyNotFoundException($"Sale with ID {query.Id} not found");
+            throw new SalesNotFoundException($"Sale with ID {query.Id} not found");
         }
 
         return _mapper.Map<GetSaleResult>(sale);

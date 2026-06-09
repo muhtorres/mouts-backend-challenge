@@ -1,3 +1,4 @@
+using Ambev.DeveloperEvaluation.Domain.Exceptions;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using MediatR;
 
@@ -26,7 +27,7 @@ public class DeleteSaleHandler : IRequestHandler<DeleteSaleCommand, DeleteSaleRe
         var deleted = await _saleRepository.DeleteAsync(command.Id, cancellationToken);
         if (!deleted)
         {
-            throw new KeyNotFoundException($"Sale with ID {command.Id} not found");
+            throw new SalesNotFoundException($"Sale with ID {command.Id} not found");
         }
 
         return new DeleteSaleResult { Success = true };
